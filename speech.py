@@ -34,3 +34,4 @@ for audio in audios:
     command = 'cscript ' + speech_config_file + ' ' + output_script_file + ' ' + output_audio_file
     os.system(command)
 
+    os.remove(output_script_file)
