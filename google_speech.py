@@ -23,13 +23,13 @@ lines = fin.read()
 audios = re.findall('\\\\audio\s*\[(.*?)\]\s*{(.*?)}', lines, re.DOTALL)
 
 client = texttospeech.TextToSpeechClient()
-voice = texttospeech.types.VoiceSelectionParams(
+voice = texttospeech.VoiceSelectionParams(
     language_code='en-US',
     #ssml_gender=texttospeech.enums.SsmlVoiceGender.FEMALE,
     name='en-US-Wavenet-F')
 
-audio_config = texttospeech.types.AudioConfig(
-    audio_encoding=texttospeech.enums.AudioEncoding.MP3)   
+audio_config = texttospeech.AudioConfig(
+    audio_encoding=texttospeech.AudioEncoding.MP3)   
 
 for audio in audios:
     file_tag = audio[0]
@@ -40,8 +40,8 @@ for audio in audios:
     fout.write(audio_script)
     fout.close()
 
-    synthesis_input = texttospeech.types.SynthesisInput(text=audio_script)
-    response = client.synthesize_speech(synthesis_input, voice, audio_config)
+    synthesis_input = texttospeech.SynthesisInput(text=audio_script)
+    response = client.synthesize_speech(input=synthesis_input, voice=voice, audio_config=audio_config)
 
     with open(file_tag+'.mp3', 'wb') as out:
         out.write(response.audio_content)
