@@ -19,3 +19,13 @@ python google_speech.py example.tex
 ```
 
 The output will be in the .wav files.
+
+
+
+## OpenAI Speech Usage
+
+```
+python openAI_speech.py example.tex
+```
+
+The output will be in the .mp3 files.
